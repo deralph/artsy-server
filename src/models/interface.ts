@@ -40,9 +40,10 @@ export interface Cart {
 }
 export interface arts {
   sellerId: String;
+  artName: String;
   image: String;
   description: String;
   category: String;
   size: String;
-  price: Number;
+  price: String;
 }
