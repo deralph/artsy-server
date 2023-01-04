@@ -1,13 +1,8 @@
-import express, {
-  Application,
-  Request,
-  Response,
-  NextFunction,
-  json,
-} from "express";
+import express, { Application, Request, Response, json } from "express";
 
 import "express-async-errors";
 import { config } from "dotenv";
+import cors from "cors";
 // import asyncError    rom 'express-async-errors'
 import connectDB from "./connect";
 import NotFound from "./middlewares/notFound";
@@ -24,6 +19,7 @@ const app: Application = express();
 const port = process.env.PORT || 5000;
 
 app.use(json());
+app.use(cors());
 
 app.get("/ap1/v1/", (req: Request, res: Response) => {
   res.send("you are in this forever");

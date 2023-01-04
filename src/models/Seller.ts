@@ -66,9 +66,13 @@ sellerSchema.methods.CheckPassword = async function (
 const secret: string | any = process.env.JWT_SECRET;
 
 sellerSchema.methods.createToken = async function () {
-  const token = sign({ username: this.username, email: this.email }, secret, {
-    expiresIn: process.env.JWT_LIFETIME,
-  });
+  const token = sign(
+    { username: this.username, userId: this._id, email: this.email },
+    secret,
+    {
+      expiresIn: process.env.JWT_LIFETIME,
+    }
+  );
   return token;
 };
 sellerSchema.statics.findByUsername = async function (

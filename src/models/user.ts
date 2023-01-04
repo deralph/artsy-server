@@ -48,7 +48,7 @@ userSchema.methods.createToken = async function () {
   console.log(process.env.JWT_LIFETIME);
   console.log(process.env.JWT_SECRET);
   const token = sign(
-    { username: this.username, email: this.email },
+    { username: this.username, userId: this._id, email: this.email },
     process.env.JWT_SECRET,
     {
       expiresIn: process.env.JWT_LIFETIME,
