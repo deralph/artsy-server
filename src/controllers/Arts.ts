@@ -18,3 +18,5 @@ const artUpload = async (req: Request, res: Response) => {
     // return res.status(400).json({status:'error',message:`image upload failed check to see the ${error}`})
   }
 };
+
+export default artUpload;
