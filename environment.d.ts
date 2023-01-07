@@ -2,9 +2,12 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       MONGO_URI: string;
-      CLIENT_SIDE?: String;
+      CLIENT_SIDE: String;
       JWT_SECRET: string;
       JWT_LIFETIME: string;
+      CLOUDINARY_HOST: string;
+      CLOUDINARY_API_key: string;
+      CLOUDINARY_API_SECRET: string;
     }
   }
 }

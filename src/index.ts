@@ -1,4 +1,10 @@
-import express, { Application, Request, Response, json } from "express";
+import express, {
+  Application,
+  Request,
+  Response,
+  json,
+  urlencoded,
+} from "express";
 
 import "express-async-errors";
 import { config } from "dotenv";
@@ -8,6 +14,7 @@ import connectDB from "./connect";
 import NotFound from "./middlewares/notFound";
 import errorHandler from "./middlewares/errorMiddleware";
 import authRouter from "./routes/user";
+import artsRouter from "./routes/arts";
 
 config();
 // asyncError()
@@ -18,14 +25,32 @@ const mongoUri: any = process.env.MONGO_URI;
 const app: Application = express();
 const port = process.env.PORT || 5000;
 
-app.use(json());
-app.use(cors());
+// declare var process: {
+//   env: {
+//     CLIENT_SIDE: String;
+//     MONGO_URI:StriStaticOrigin | CustomOrigin | undefinedng;
+//   };
+// };
 
-app.get("/ap1/v1/", (req: Request, res: Response) => {
+const origin = process.env.CLIENT_SIDE;
+
+app.use(urlencoded({ extended: true }));
+app.use(json());
+app.use(
+  cors({
+    // origin: function (origin, callback) {},
+    origin: "http://localhost:3000",
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
+
+app.get("/api/v1/", (req: Request, res: Response) => {
   res.send("you are in this forever");
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/art", artsRouter);
 app.use(errorHandler);
 app.use(NotFound);
 
