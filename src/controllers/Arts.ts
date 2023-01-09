@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 const artUpload = async (req: Request, res: Response) => {
   // interface Decoded extends Request {
   //   file: {
-  //     path: any;
+  //     path:unknown;
   //   };
   // }
   console.log("in art upload");

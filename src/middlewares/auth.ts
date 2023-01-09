@@ -19,7 +19,10 @@ const authMiiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (!token || token === "user is out") {
     throw new Unauthorized("no token available");
   }
-  const decoded: JwtPayload | any = jwt.verify(token, process.env.JWT_SECRET);
+  const decoded: JwtPayload | unknown = jwt.verify(
+    token,
+    process.env.JWT_SECRET
+  );
   console.log(decoded);
   if (!decoded) {
     throw new BadRequest("something went wrong");

@@ -20,7 +20,15 @@ config();
 // asyncError()
 // require("express-async-errors");
 
-const mongoUri: any = process.env.MONGO_URI;
+declare var process: {
+  env: {
+    MONGO_URI: string;
+    PORT: string | number;
+    CLIENT_SIDE: string;
+  };
+};
+
+const mongoUri: unknown = process.env.MONGO_URI;
 
 const app: Application = express();
 const port = process.env.PORT || 5000;
@@ -57,7 +65,7 @@ app.use(NotFound);
 const start = async () => {
   try {
     console.log(mongoUri);
-    await connectDB(mongoUri);
+    await connectDB(process.env.MONGO_URI);
     console.log("inside db");
     app.listen(port, () => console.log(`server listening at port ${port}`));
   } catch (error) {

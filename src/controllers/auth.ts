@@ -3,9 +3,10 @@ import { CookieOptions, Request, Response } from "express";
 import User from "../models/user";
 import Seller from "../models/Seller";
 import Unathenticated from "../errors/unauthenticated";
-import { Iseller, Iuser } from "../models/interface";
+import { Iseller, IsellerModel, Iuser } from "../models/interface";
 import serverError from "../errors/serverError";
 import BadRequest from "../errors/badRequest";
+import { AnyKeys } from "mongoose";
 
 interface Input {
   email: String;
@@ -65,7 +66,7 @@ const Login = async (req: Request, res: Response) => {
   }
 
   const token = await user.createToken();
-  console.log("checking for any errors");
+  console.log("checking forunknown errors");
   if (!token) {
     throw new Unathenticated("an error ocurred while generating token");
   }
@@ -106,17 +107,17 @@ const sellerSignup = async (req: Request, res: Response) => {
     recieveEmail,
   };
 
-  const user = await User.findByUsername(email);
+  const user: any = await User.findByUsername(email);
   if (user) {
     throw new BadRequest("a user already existed with this email");
   }
 
-  const seller = await Seller.createSeller(newSeller);
+  const seller: any = await Seller.createSeller(newSeller);
   if (!seller) {
     throw new serverError("an error occured please try again");
   }
 
-  const token = seller.createToken();
+  const token: String = seller.createToken();
   if (!token) {
     throw new serverError("an error occured please try again");
   }

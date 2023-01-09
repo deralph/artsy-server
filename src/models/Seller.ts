@@ -7,6 +7,13 @@ const validate = require("mongoose-validator");
 
 //adding maximum character to a mongoose schema?
 
+declare var process: {
+  env: {
+    JWT_SECRET: string;
+    JWT_LIFETIME: string;
+  };
+};
+
 var nameValidator = [
   validate({
     validator: "isLength",
@@ -63,7 +70,7 @@ sellerSchema.methods.CheckPassword = async function (
   return isPassword;
 };
 
-const secret: string | any = process.env.JWT_SECRET;
+const secret: string = process.env.JWT_SECRET;
 
 sellerSchema.methods.createToken = async function () {
   const token = sign(
