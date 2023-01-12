@@ -6,7 +6,7 @@ declare global {
       JWT_SECRET: string;
       JWT_LIFETIME: string;
       CLOUDINARY_HOST: string;
-      CLOUDINARY_API_key: string;
+      CLOUDINARY_API_KEY: string;
       CLOUDINARY_API_SECRET: string;
     }
   }

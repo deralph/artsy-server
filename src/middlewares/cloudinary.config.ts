@@ -3,22 +3,23 @@ import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_HOST,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: "dyvpxtoqc",
+  api_key: "253766466748743",
+  api_secret: "JRe3INr0nESG2S7FAMxjHKHsfVc",
 });
 
-// const storage: CloudinaryStorage = new CloudinaryStorage({
-//   cloudinary: cloudinary,
-//   params: {
-//     folder: "artsy",
-//     format: async () => "png",
-//     public_id: (req, file) => file.filename,
-//   },
-// });
+const storage: CloudinaryStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  // folder:'artsy'
+  params: {
+    // format: async () => "png",
+    public_id: (req, file) => file.filename,
+    // folder: "artsy",
+  },
+});
 
 // using CloudinaryStorage in typescript
 
-const parser = multer({ dest: "uploads/" });
+const parser = multer({ storage });
 
 export default parser;

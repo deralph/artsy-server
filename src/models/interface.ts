@@ -12,7 +12,7 @@ export interface IuserModel extends Iuser {
   CheckPassword: (password: String) => Boolean;
   createToken: () => String;
   findByUsername: (email: String, username?: String) => any;
-  createUser: (body: Iuser) => unknown;
+  createUser: (body: Iuser) => any;
 }
 
 export interface Iseller {
@@ -29,7 +29,7 @@ export interface IsellerModel extends Iseller {
   CheckPassword: (password: String) => Boolean;
   createToken: () => String;
   findByUsername: (email: String, username?: String) => any;
-  createSeller: (body: Iseller) => unknown;
+  createSeller: (body: Iseller) => any;
 }
 export interface Cart {
   userId: String;
@@ -41,7 +41,7 @@ export interface Cart {
 export interface Arts {
   sellerId: String;
   artName: String;
-  image: String;
+  image: { path: string; id: string };
   description: String;
   category: String;
   size: String;

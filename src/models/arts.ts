@@ -15,7 +15,7 @@ const artSchema = new Schema<Arts>(
       unique: true,
     },
     image: {
-      type: String,
+      type: Object,
       required: true,
     },
     description: {
