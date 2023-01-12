@@ -8,7 +8,10 @@ const artUpload = async (req: Request, res: Response) => {
   //   };
   // }
   console.log("in art upload");
+  console.log("req body");
   console.log(req.body);
+  console.log("req file");
+  console.log(req.file);
   // const imageUpload = new Arts({
   //   sellerId:'1',
   //   artName:'2',
@@ -26,7 +29,7 @@ const artUpload = async (req: Request, res: Response) => {
   //   // return res.status(400).json({status:'error',message:`image upload failed check to see the ${error}`})
   // }
 
-  res.json({ message: "file upload" });
+  res.json({ message: "file upload", body: req.body });
 };
 
 export default artUpload;

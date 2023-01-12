@@ -3,7 +3,7 @@ import { CookieOptions, Request, Response } from "express";
 import User from "../models/user";
 import Seller from "../models/Seller";
 import Unathenticated from "../errors/unauthenticated";
-import { Iseller, IsellerModel, Iuser } from "../models/interface";
+import { Iseller, IsellerModel, Iuser, IuserModel } from "../models/interface";
 import serverError from "../errors/serverError";
 import BadRequest from "../errors/badRequest";
 import { AnyKeys } from "mongoose";
@@ -148,7 +148,7 @@ const userSignup = async (req: Request, res: Response) => {
     throw new serverError("an error occured please try again");
   }
 
-  const token = user.createToken();
+  const token = User.createToken();
   if (!token) {
     throw new serverError("an error occured please try again");
   }

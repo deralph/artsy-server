@@ -42,8 +42,8 @@ const port = process.env.PORT || 5000;
 
 const origin = process.env.CLIENT_SIDE;
 
-app.use(urlencoded({ extended: true }));
 app.use(json());
+app.use(urlencoded({ extended: true }));
 app.use(
   cors({
     // origin: function (origin, callback) {},
