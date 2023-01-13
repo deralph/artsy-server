@@ -1,3 +1,6 @@
+import { config } from "dotenv";
+config();
+// console.log(process.env);
 import express, {
   Application,
   Request,
@@ -7,16 +10,17 @@ import express, {
 } from "express";
 
 import "express-async-errors";
-import { config } from "dotenv";
 import cors from "cors";
+
+// import multer from "multer";
 // import asyncError    rom 'express-async-errors'
 import connectDB from "./connect";
 import NotFound from "./middlewares/notFound";
 import errorHandler from "./middlewares/errorMiddleware";
 import authRouter from "./routes/user";
 import artsRouter from "./routes/arts";
+import authMiiddleware from "./middlewares/auth";
 
-config();
 // asyncError()
 // require("express-async-errors");
 
@@ -42,8 +46,14 @@ const port = process.env.PORT || 5000;
 
 const origin = process.env.CLIENT_SIDE;
 
+// const upload =multer()
+
 app.use(json());
 app.use(urlencoded({ extended: true }));
+
+// app.use(upload.array());
+app.use(express.static("public"));
+
 app.use(
   cors({
     // origin: function (origin, callback) {},

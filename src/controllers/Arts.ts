@@ -10,11 +10,13 @@ cloudinary.config({
 });
 
 const artUpload = async (req: Request, res: Response) => {
-  // interface Decoded extends Request {
-  //   file: {
-  //     path:unknown;
-  //   };
-  // }
+  interface Decoded extends Request {
+    user: {
+      userId: String;
+      username: String;
+      email: String;
+    };
+  }
   console.log("in art upload");
   console.log("req body");
   console.log(req.body);
@@ -23,7 +25,7 @@ const artUpload = async (req: Request, res: Response) => {
   console.log(req.file?.path);
   const { artName, description, category, size, price } = req.body;
   const imageUpload = new Arts({
-    // sellerId:req.user?.userId,
+    sellerId: (req as Decoded).user?.userId,
     artName,
     image: { path: req.file?.path, id: req.file?.filename },
     description,
@@ -36,12 +38,10 @@ const artUpload = async (req: Request, res: Response) => {
     await imageUpload.save();
   } catch (error) {
     console.log(error);
-    return res
-      .status(400)
-      .json({
-        status: "error",
-        message: `image upload failed check to see the ${error}`,
-      });
+    return res.status(400).json({
+      status: "error",
+      message: `image upload failed check to see the ${error}`,
+    });
   }
 
   res.json({ message: "file upload", body: req.body });

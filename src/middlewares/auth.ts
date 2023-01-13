@@ -4,7 +4,7 @@ import Unauthorized from "../errors/unauthenticated";
 import BadRequest from "../errors/badRequest";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-export interface Decoded extends Request {
+interface Decoded extends Request {
   user: {
     userId: String;
     username: String;
@@ -19,10 +19,7 @@ const authMiiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (!token || token === "user is out") {
     throw new Unauthorized("no token available");
   }
-  const decoded: JwtPayload | unknown = jwt.verify(
-    token,
-    process.env.JWT_SECRET
-  );
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
   console.log(decoded);
   if (!decoded) {
     throw new BadRequest("something went wrong");
@@ -35,4 +32,4 @@ const authMiiddleware = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-module.exports = authMiiddleware;
+export default authMiiddleware;
