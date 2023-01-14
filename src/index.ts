@@ -68,7 +68,7 @@ app.get("/api/v1/", (req: Request, res: Response) => {
 });
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/art", artsRouter);
+app.use("/api/v1/art", authMiiddleware, artsRouter);
 app.use(errorHandler);
 app.use(NotFound);
 

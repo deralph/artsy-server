@@ -17,12 +17,14 @@ const artUpload = async (req: Request, res: Response) => {
       email: String;
     };
   }
+  console.log((req as Decoded).user);
   console.log("in art upload");
   console.log("req body");
   console.log(req.body);
   console.log("req file");
   console.log(req.file);
   console.log(req.file?.path);
+
   const { artName, description, category, size, price } = req.body;
   const imageUpload = new Arts({
     sellerId: (req as Decoded).user?.userId,
