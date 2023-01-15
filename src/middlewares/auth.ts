@@ -26,6 +26,10 @@ interface dataStoredInToken {
 }
 
 const authMiiddleware = (req: Request, res: Response, next: NextFunction) => {
+  console.log("req.cookies");
+  console.log(req.cookies);
+  console.log("req.headers");
+  console.log(req.headers);
   const token: string = req.cookies.token;
   console.log(token);
 

@@ -3,20 +3,14 @@ import { Request, Response } from "express";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-cloudinary.config({
-  cloud_name: "dyvpxtoqc",
-  api_key: "253766466748743",
-  api_secret: "JRe3INr0nESG2S7FAMxjHKHsfVc",
-});
-
+interface Decoded extends Request {
+  user: {
+    userId: String;
+    username: String;
+    email: String;
+  };
+}
 const artUpload = async (req: Request, res: Response) => {
-  interface Decoded extends Request {
-    user: {
-      userId: String;
-      username: String;
-      email: String;
-    };
-  }
   console.log((req as Decoded).user);
   console.log("in art upload");
   console.log("req body");
@@ -68,4 +62,8 @@ const cloudGet = async (req: Request, res: Response) => {
   return;
 };
 
-export default { artUpload, cloudGet };
+const checkMiddleware = (req: Request, res: Response) => {
+  console.log((req as Decoded).user);
+};
+
+export default { artUpload, cloudGet, checkMiddleware };

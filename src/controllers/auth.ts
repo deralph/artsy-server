@@ -16,9 +16,9 @@ interface Input {
 }
 
 const TokenOption: CookieOptions = {
-  httpOnly: true,
+  // httpOnly: true,
   expires: new Date(Date.now() + 60 * 60 * 24 * 30 * 1000),
-  secure: true,
+  // secure: true,
   sameSite: "none",
 };
 const Login = async (req: Request, res: Response) => {
@@ -67,6 +67,7 @@ const Login = async (req: Request, res: Response) => {
 
   const token = await user.createToken();
   console.log("checking forunknown errors");
+  console.log(token);
   if (!token) {
     throw new Unathenticated("an error ocurred while generating token");
   }
