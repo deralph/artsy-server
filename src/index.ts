@@ -11,6 +11,7 @@ import express, {
 
 import "express-async-errors";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 // import multer from "multer";
 // import asyncError    rom 'express-async-errors'
@@ -37,6 +38,7 @@ const mongoUri: unknown = process.env.MONGO_URI;
 const app: Application = express();
 const port = process.env.PORT || 5000;
 
+app.use(cookieParser());
 // declare var process: {
 //   env: {
 //     CLIENT_SIDE: String;

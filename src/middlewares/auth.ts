@@ -30,14 +30,14 @@ const authMiiddleware = (req: Request, res: Response, next: NextFunction) => {
   console.log(req.cookies);
   console.log("req.headers");
   console.log(req.headers);
-  const token: string = req.cookies.token;
-  console.log(token);
+  const cookies = req.cookies;
+  console.log(cookies);
 
-  if (!token || token === "user is out") {
+  if (!cookies || cookies.token === "user is out") {
     throw new Unauthorized("no token available");
   }
   const decoded: JwtPayload = jwt.verify(
-    token,
+    cookies.token,
     process.env.JWT_SECRET
   ) as dataStoredInToken;
   console.log(decoded);

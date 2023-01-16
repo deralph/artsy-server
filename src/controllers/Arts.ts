@@ -33,6 +33,9 @@ const artUpload = async (req: Request, res: Response) => {
   try {
     await imageUpload.save();
   } catch (error) {
+    cloudinary.uploader.destroy(req.file?.filename!, function (err, result) {
+      console.log(result);
+    });
     console.log(error);
     return res.status(400).json({
       status: "error",

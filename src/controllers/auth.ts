@@ -16,10 +16,10 @@ interface Input {
 }
 
 const TokenOption: CookieOptions = {
-  // httpOnly: true,
+  httpOnly: true,
   expires: new Date(Date.now() + 60 * 60 * 24 * 30 * 1000),
   // secure: true,
-  sameSite: "none",
+  // sameSite: "none",
 };
 const Login = async (req: Request, res: Response) => {
   const { email, username, password, seller }: Input = req.body;
